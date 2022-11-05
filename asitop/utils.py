@@ -16,9 +16,8 @@ def parse_powermetrics(queue):
         thermal_pressure = parse_thermal_pressure(powermetrics_parse)
         cpu_metrics_dict = parse_cpu_metrics(powermetrics_parse)
         gpu_metrics_dict = parse_gpu_metrics(powermetrics_parse)
-        bandwidth_metrics = parse_bandwidth_metrics(powermetrics_parse)
         timestamp = powermetrics_parse["timestamp"]
-        return cpu_metrics_dict, gpu_metrics_dict, thermal_pressure, bandwidth_metrics, timestamp
+        return cpu_metrics_dict, gpu_metrics_dict, thermal_pressure, timestamp
     except Exception as e:
         return False
 
@@ -68,7 +67,7 @@ def run_powermetrics_process(nice=10, interval=1000):
         "sudo nice -n",
         str(nice),
         "powermetrics",
-        "--samplers cpu_power,gpu_power,thermal,bandwidth",
+        "--samplers cpu_power,gpu_power,ane_power,thermal",
         "-f plist",
         "-i",
         str(interval)
@@ -178,23 +177,4 @@ def get_soc_info():
     else:
         soc_info["cpu_max_power"] = 20
         soc_info["gpu_max_power"] = 20
-    # bandwidth
-    if soc_info["name"] == "Apple M1 Max":
-        soc_info["cpu_max_bw"] = 250
-        soc_info["gpu_max_bw"] = 400
-    elif soc_info["name"] == "Apple M1 Pro":
-        soc_info["cpu_max_bw"] = 200
-        soc_info["gpu_max_bw"] = 200
-    elif soc_info["name"] == "Apple M1":
-        soc_info["cpu_max_bw"] = 70
-        soc_info["gpu_max_bw"] = 70
-    elif soc_info["name"] == "Apple M1 Ultra":
-        soc_info["cpu_max_bw"] = 500
-        soc_info["gpu_max_bw"] = 800
-    elif soc_info["name"] == "Apple M2":
-        soc_info["cpu_max_bw"] = 100
-        soc_info["gpu_max_bw"] = 100
-    else:
-        soc_info["cpu_max_bw"] = 70
-        soc_info["gpu_max_bw"] = 70
     return soc_info
