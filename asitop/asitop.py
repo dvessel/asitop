@@ -24,10 +24,7 @@ args = parser.parse_args()
 
 def main():
     print("\nASITOP - Performance monitoring CLI tool for Apple Silicon")
-    print("You can update ASITOP by running `pip install asitop --upgrade`")
-    print("Get help at `https://github.com/tlkh/asitop`")
-    print("P.S. You are recommended to run ASITOP with `sudo asitop`\n")
-    print("\n[1/3] Loading ASITOP\n")
+    print("\n[1/3] Loading ASITOP")
     print("\033[?25l")
 
     cpu1_gauge = HGauge(title="E-CPU Usage", val=0, color=args.color)
@@ -58,17 +55,13 @@ def main():
         HSplit(cpu1_gauge, cpu2_gauge),
         HSplit(*gpu_ane_gauges)
     ]
-    processor_split = VSplit(
+    ram_gauge = HGauge(title="RAM Usage", val=0, color=args.color)
+
+    soc_split = VSplit(
         *processor_gauges,
+        ram_gauge,
         title="Processor Utilization",
         border_color=args.color,
-    )
-
-    ram_gauge = HGauge(title="RAM Usage", val=0, color=args.color)
-    memory_gauges = VSplit(
-        ram_gauge,
-        border_color=args.color,
-        title="Memory"
     )
 
     cpu_power_chart = HChart(title="CPU Power", color=args.color)
@@ -78,22 +71,13 @@ def main():
         gpu_power_chart,
         title="Power Chart",
         border_color=args.color,
-    ) if args.show_cores else HSplit(
-        cpu_power_chart,
-        gpu_power_chart,
-        title="Power Chart",
-        border_color=args.color,
     )
 
     ui = HSplit(
-        processor_split,
-        VSplit(
-            memory_gauges,
-            power_charts,
-        )
+        soc_split,
+        power_charts,
     ) if args.show_cores else VSplit(
-        processor_split,
-        memory_gauges,
+        soc_split,
         power_charts,
     )
 
