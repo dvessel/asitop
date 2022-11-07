@@ -67,7 +67,7 @@ def run_powermetrics_process(nice=10, interval=1000):
     command = " ".join([
         "sudo nice -n",
         str(nice),
-        "powermetrics",
+        "powermetrics@12",
         "--samplers cpu_power,gpu_power,thermal,bandwidth",
         "-f plist",
         "-i",

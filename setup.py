@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 long_description = 'Performance monitoring CLI tool for Apple Silicon'
 
 setup(
-    name='asitop',
+    name='asitop12',
     version='0.0.21',
     author='Timothy Liu',
     author_email='tlkh.xms@gmail.com',
@@ -15,7 +15,7 @@ setup(
     packages=find_packages(),
     entry_points={
             'console_scripts': [
-                'asitop = asitop.asitop:main'
+                'asitop12 = asitop12.asitop:main'
             ]
     },
     classifiers=(
