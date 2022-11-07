@@ -162,22 +162,22 @@ def get_soc_info():
     # TDP (power)
     if soc_info["name"] == "Apple M1 Max":
         soc_info["cpu_max_power"] = 30
-        soc_info["gpu_max_power"] = 60
+        soc_info["gpu_max_power"] = 40
     elif soc_info["name"] == "Apple M1 Pro":
         soc_info["cpu_max_power"] = 30
-        soc_info["gpu_max_power"] = 30
+        soc_info["gpu_max_power"] = 20
     elif soc_info["name"] == "Apple M1":
         soc_info["cpu_max_power"] = 20
-        soc_info["gpu_max_power"] = 20
+        soc_info["gpu_max_power"] = 10
     elif soc_info["name"] == "Apple M1 Ultra":
         soc_info["cpu_max_power"] = 60
-        soc_info["gpu_max_power"] = 120
+        soc_info["gpu_max_power"] = 80
     elif soc_info["name"] == "Apple M2":
         soc_info["cpu_max_power"] = 25
         soc_info["gpu_max_power"] = 15
     else:
         soc_info["cpu_max_power"] = 20
-        soc_info["gpu_max_power"] = 20
+        soc_info["gpu_max_power"] = 10
     # bandwidth
     if soc_info["name"] == "Apple M1 Max":
         soc_info["cpu_max_bw"] = 250
