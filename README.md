@@ -1,14 +1,23 @@
 # asitop
 
-![PyPI - Downloads](https://img.shields.io/pypi/dm/asitop)
-
 Performance monitoring CLI tool for Apple Silicon
 
-![](images/asitop.png)
+_Note: This is a [fork](https://github.com/6-6-6/asitop) of a [fork](https://github.com/tlkh/asitop). The original from tlkh was abandonded._
+
+Ventura removed bandwidth and package power readings. It can be installed with the following:
 
 ```shell
-pip install asitop
+pip install git+https://github.com/dvessel/asitop.git@Ventura
 ```
+Call it with `asitop`.
+
+If you have a copy of `powermetrics` from Monterey, you can rename it `powermetrics@12` and throw it in a `path`. It will restore the bandwidth and package power readings. Install with the following to use the older version. Both can be installed without conflict.
+
+```shell
+pip install git+https://github.com/dvessel/asitop.git@Ventura-PM12
+```
+
+Call it with `asitop12`.
 
 ## What is `asitop`
 
@@ -20,10 +29,10 @@ A Python-based `nvtop`-inspired command line tool for Apple Silicon (aka M1) Mac
   * ANE utilization (measured by power)
 * Memory info:
   * RAM and swap, size and usage
-  * Memory bandwidth (CPU/GPU/total)
+  * Memory bandwidth (CPU/GPU/total) _(`asitop12` only*)_
   * Media engine bandwidth usage
 * Power info:
-  * Package power, CPU power, GPU power
+  * Package power, CPU power, GPU power _(`asitop12` only*)_
   * Chart for CPU/GPU power
   * Peak power, rolling average display
 
@@ -59,7 +68,7 @@ optional arguments:
 * CPU/GPU utilization via active residency
 * CPU/GPU frequency
 * Package/CPU/GPU/ANE energy consumption
-* CPU/GPU/Media Total memory bandwidth via the DCS (DRAM Command Scheduler)
+* CPU/GPU/Media Total memory bandwidth via the DCS (DRAM Command Scheduler) _(`asitop12` only*)_
 
 [`psutil`](https://github.com/giampaolo/psutil) is used to measure the following:
 
